@@ -28,7 +28,7 @@ public class SmsReaderPlugin extends Plugin {
 
     @PluginMethod
     public void getRecentMessages(PluginCall call) {
-        if (!getPermissionState("sms").equals(PermissionState.GRANTED)) {
+        if (getPermissionState("sms") != PermissionState.GRANTED) {
             requestPermissionForAlias("sms", call, "smsPermsCallback");
             return;
         }
@@ -37,7 +37,7 @@ public class SmsReaderPlugin extends Plugin {
 
     @PermissionCallback
     private void smsPermsCallback(PluginCall call) {
-        if (getPermissionState("sms").equals(PermissionState.GRANTED)) {
+        if (getPermissionState("sms") == PermissionState.GRANTED) {
             readSmsInbox(call);
         } else {
             call.reject("Permission to read SMS was denied");
