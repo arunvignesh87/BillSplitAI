@@ -1,0 +1,137 @@
+.page { max-width: 900px; margin: 0 auto; }
+.header { margin-bottom: 24px; }
+.title { font-size: 1.75rem; font-weight: 800; margin-bottom: 4px; }
+.subtitle { color: var(--text-secondary); font-size: 0.875rem; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.cardTitle { font-size: 1rem; font-weight: 700; margin-bottom: 16px; }
+
+/* Profile */
+.avatarSection { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6c63ff, #a78bfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.userName { font-weight: 700; font-size: 1rem; }
+.userEmail { font-size: 0.8rem; color: var(--text-muted); }
+
+.field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.field label { font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; }
+.field input, .field select {
+  padding: 10px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.field select option {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+.field input:focus, .field select:focus { border-color: var(--accent-primary); }
+.field input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.saveBtn {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(135deg, #6c63ff, #a78bfa);
+  border: none;
+  border-radius: var(--radius-xs);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: opacity 0.2s;
+}
+.saveBtn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* Info */
+.infoList { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.infoRow:last-child { border-bottom: none; }
+.infoRow span:first-child { color: var(--text-secondary); }
+.badge {
+  padding: 3px 10px;
+  background: rgba(108,99,255,0.15);
+  border: 1px solid rgba(108,99,255,0.3);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: var(--accent-secondary);
+  font-weight: 600;
+}
+
+.premiumCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(251,191,36,0.05));
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: var(--radius-sm);
+}
+.premiumIcon { font-size: 1.5rem; }
+.premiumTitle { font-size: 0.875rem; font-weight: 700; }
+.premiumDesc { font-size: 0.75rem; color: var(--text-muted); }
+.premiumBtn {
+  margin-left: auto;
+  padding: 7px 14px;
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  border: none;
+  border-radius: var(--radius-xs);
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+/* About */
+.aboutList { display: flex; flex-direction: column; gap: 14px; margin-bottom: 16px; }
+.aboutRow { display: flex; align-items: flex-start; gap: 12px; }
+.aboutIcon { font-size: 1.3rem; width: 32px; text-align: center; }
+.aboutLabel { font-size: 0.875rem; font-weight: 600; }
+.aboutDesc { font-size: 0.75rem; color: var(--text-muted); }
+.version { font-size: 0.7rem; color: var(--text-muted); text-align: center; }
+
+/* Danger */
+.dangerCard { border-color: rgba(239,68,68,0.15) !important; }
+.dangerDesc { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 16px; }
+.logoutBtn {
+  width: 100%;
+  padding: 11px;
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.25);
+  border-radius: var(--radius-sm);
+  color: #ef4444;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+.logoutBtn:hover { background: rgba(239,68,68,0.2); }
+
+@media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }

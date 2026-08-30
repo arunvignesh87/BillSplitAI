@@ -1,0 +1,224 @@
+.page { max-width: 1100px; margin: 0 auto; }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title { font-size: 1.75rem; font-weight: 800; margin-bottom: 4px; }
+.subtitle { color: var(--text-secondary); font-size: 0.9rem; }
+
+.addBtn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #6c63ff, #a78bfa);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: opacity 0.2s;
+}
+.addBtn:hover { opacity: 0.85; }
+
+/* Popular */
+.popularSection { margin-bottom: 24px; }
+.sectionLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.popularGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.popularItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+.popularItem:hover {
+  border-color: var(--accent-primary);
+  background: var(--bg-card-hover);
+}
+.popularName { font-weight: 500; }
+.popularCost { color: var(--text-muted); }
+
+/* Filters */
+.filters { margin-bottom: 20px; }
+.search {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search:focus { border-color: var(--accent-primary); }
+
+.catFilter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.catBtn {
+  padding: 5px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  transition: all 0.2s;
+}
+.catBtn:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+.catActive {
+  background: rgba(108,99,255,0.15) !important;
+  border-color: rgba(108,99,255,0.4) !important;
+  color: var(--accent-secondary) !important;
+}
+
+/* Grid */
+.subGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.subCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: border-color 0.2s, transform 0.1s;
+}
+.subCard:hover {
+  border-color: rgba(108,99,255,0.3);
+  transform: translateY(-2px);
+}
+
+.subCardTop { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.subCardIcon { font-size: 1.8rem; width: 44px; text-align: center; }
+.subCardInfo { flex: 1; }
+.subCardName { font-weight: 700; font-size: 0.95rem; }
+.subCardCat { font-size: 0.75rem; color: var(--text-muted); }
+.subCardCost { font-size: 1.2rem; font-weight: 800; }
+.subCardCost span { font-size: 0.75rem; color: var(--text-muted); font-weight: 400; }
+.subCardRenewal { font-size: 0.75rem; color: var(--accent-orange); margin-bottom: 6px; }
+.subCardNotes { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 10px; font-style: italic; }
+
+.subCardActions { display: flex; gap: 8px; margin-top: 14px; }
+.editBtn, .deleteBtn {
+  flex: 1;
+  padding: 7px;
+  border-radius: var(--radius-xs);
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  border: none;
+}
+.editBtn { background: rgba(108,99,255,0.15); color: var(--accent-secondary); }
+.editBtn:hover { background: rgba(108,99,255,0.25); }
+.deleteBtn { background: rgba(239,68,68,0.1); color: #ef4444; }
+.deleteBtn:hover { background: rgba(239,68,68,0.2); }
+
+/* Empty / Loading */
+.emptyState, .loadState {
+  text-align: center;
+  padding: 60px;
+  color: var(--text-muted);
+}
+.emptyState span { font-size: 3rem; display: block; margin-bottom: 12px; }
+
+/* Modal */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+.modal {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 460px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.modalHeader h2 { font-size: 1.1rem; font-weight: 700; }
+.closeBtn { background: none; border: none; color: var(--text-muted); font-size: 1.2rem; }
+.closeBtn:hover { color: var(--text-primary); }
+.modalBody { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; }
+.modalFooter {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; }
+.field input, .field select {
+  padding: 10px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.field input:focus, .field select:focus { border-color: var(--accent-primary); }
+.field select option { background: var(--bg-card); }
+
+.cancelBtn {
+  padding: 9px 18px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+.saveBtn {
+  padding: 9px 18px;
+  background: linear-gradient(135deg, #6c63ff, #a78bfa);
+  border: none;
+  border-radius: var(--radius-xs);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.saveBtn:disabled { opacity: 0.7; cursor: not-allowed; }
