@@ -12,6 +12,7 @@
     "@capacitor/android": "^8.5.0",
     "@capacitor/cli": "^8.5.0",
     "@capacitor/core": "^8.5.0",
+    "@capacitor/ios": "^8.5.0",
     "@google/generative-ai": "^0.21.0",
     "date-fns": "^4.1.0",
     "firebase": "^10.13.2",
