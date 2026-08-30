@@ -25,26 +25,66 @@ export function AuthProvider({ children }) {
   const [profile, setProfile] = useState(null);
 
   const loadProfile = useCallback(async (uid) => {
+    // 1. Check local cache first for instantaneous startup
     try {
-      const snap = await getDoc(doc(db, 'users', uid));
-      if (snap.exists()) {
-        setProfile(snap.data());
-      } else {
-        // Default profile
-        const defaults = { currency: 'USD', notificationsEnabled: false };
-        await setDoc(doc(db, 'users', uid), defaults);
-        setProfile(defaults);
+      const cached = localStorage.getItem(`profile_${uid}`);
+      if (cached) {
+        setProfile(JSON.parse(cached));
       }
-    } catch {
-      setProfile({ currency: 'USD', notificationsEnabled: false });
+    } catch {}
+
+    // 2. Fetch from Firestore with timeout protection
+    try {
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Firestore timeout')), 4000)
+      );
+      const snap = await Promise.race([
+        getDoc(doc(db, 'users', uid)),
+        timeoutPromise
+      ]);
+
+      if (snap && snap.exists && snap.exists()) {
+        const data = snap.data();
+        setProfile(data);
+        try { localStorage.setItem(`profile_${uid}`, JSON.stringify(data)); } catch {}
+      } else {
+        const defaults = { currency: 'USD', notificationsEnabled: false, currencySet: false };
+        setDoc(doc(db, 'users', uid), defaults).catch(() => {});
+        setProfile(prev => prev || defaults);
+      }
+    } catch (err) {
+      console.warn('Firestore load profile error, using local defaults:', err);
+      setProfile(prev => prev || { currency: 'USD', notificationsEnabled: false, currencySet: false });
     }
   }, []);
 
   const updateProfile = useCallback(async (data) => {
-    if (!user) return;
-    const updated = { ...profile, ...data };
-    await setDoc(doc(db, 'users', user.uid), updated, { merge: true });
+    const updated = { ...(profile || {}), ...data };
+    
+    // 1. Instant optimistic update so UI never hangs
     setProfile(updated);
+
+    // 2. Persist locally
+    if (user?.uid) {
+      try {
+        localStorage.setItem(`profile_${user.uid}`, JSON.stringify(updated));
+      } catch {}
+    }
+
+    // 3. Background sync to Firestore with timeout
+    if (user) {
+      try {
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Firestore timeout')), 4000)
+        );
+        await Promise.race([
+          setDoc(doc(db, 'users', user.uid), updated, { merge: true }),
+          timeoutPromise
+        ]);
+      } catch (err) {
+        console.warn('Firestore profile sync warning (saved locally):', err);
+      }
+    }
   }, [user, profile]);
 
   useEffect(() => {
